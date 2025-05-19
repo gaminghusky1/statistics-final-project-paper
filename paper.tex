@@ -1,0 +1,63 @@
+%! Author = JustinMa
+%! Date = 5/19/25
+
+% Preamble
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{float}
+
+\title{Investigating Overfitting in Convolutional Neural Networks}
+\date{\today}
+
+% Document
+\begin{document}
+
+    \maketitle
+
+    \section*{1. Introduction}
+
+    Neural networks are a form of machine learning models, roughly inspired from how the human brain processes information.
+    They have become increasingly prevalent in our developing world, providing powerful and unique solutions to a wide variety of problems.
+    However, with power also comes risk, as training a neural network too much can cause overfitting.
+    Overfitting occurs when a model learns the training data too well and performs poorly on unseen data.
+    In this study, we investigate whether increasing the number of parameters in a convolutional neural network
+    leads to greater overfitting, as measured by the difference between training and test accuracy.
+
+    \section*{2. Statistical Question}
+
+    Does increasing the number of parameters in a fixed CNN architecture cause a greater difference between training and testing accuracy?
+
+    \subsection*{Hypotheses}
+
+    $H_0: \beta = 0$ \newline
+    $H_a: \beta \geq 0$
+    \newline \newline
+    Where $\beta$ is the true slope of the population least-squares regression line that relates number of parameters of the model to the difference in accuracy of the model on the train dataset and the test dataset.
+
+    \section*{3. Data Collection}
+
+    We trained \mathbf{x} convolutional models on the CIFAR-10 dataset, each with the same architecture (pictured below) but different numbers of
+    parameters ranging from approximately 1 million to 50 million.
+
+    For each model, we calculated:
+
+    \[
+        \Delta \text{Accuracy} = \text{Train Accuracy} - \text{Test Accuracy}
+    \]
+
+    We then analyzed the relationship between \( \Delta \text{Accuracy} \) and the model size.
+
+    \section*{Data Display}
+
+
+    \section*{Data Analysis}
+
+    \section*{Conclusion}
+
+    \section*{Reflection}
+\end{document}
