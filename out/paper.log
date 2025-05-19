@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  19 MAY 2025 09:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  19 MAY 2025 09:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -220,19 +220,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 37--41
  []
 
 
-./paper.tex:44: LaTeX Error: \mathbf allowed only in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.44     We trained \mathbf{x}
-                               convolutional models on the CIFAR-10 dataset,...
-
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
 
 [1
 
@@ -245,11 +232,11 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 3487 strings out of 473190
- 58371 string characters out of 5715801
+ 3490 strings out of 473190
+ 58362 string characters out of 5715801
  450408 words of memory out of 5000000
- 26745 multiletter control sequences out of 15000+600000
- 564823 words of font info for 57 fonts, out of 8000000 for 9000
+ 26746 multiletter control sequences out of 15000+600000
+ 565751 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,6n,65p,237b,202s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
@@ -259,7 +246,7 @@ usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
 r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
 local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loc
 al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on out/paper.pdf (2 pages, 79007 bytes).
+Output written on out/paper.pdf (2 pages, 78803 bytes).
 PDF statistics:
  46 PDF objects out of 1000 (max. 8388607)
  27 compressed objects within 1 object stream
