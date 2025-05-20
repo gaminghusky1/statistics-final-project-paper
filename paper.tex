@@ -69,29 +69,30 @@
     \centerline{$H_a: \beta > 0$} \newline
     Where $\beta$ is the true slope of the population least‐squares regression line that relates number
     of parameters of the model to the difference in accuracy of the model on the train dataset and the
-    test dataset.
+    test dataset (train - test).
 
     \noindent\textbf{3. Data Collection}
 
-    We trained $\mathbf{x}$ convolutional models on a randomly selected small subset of size 100 images
-    from the CIFAR-10 dataset, each with the same architecture (\textit{see figure 1}). Each model had
-    a different number of parameters, roughly uniformly ranging from approximately 1 million to 50 million.
-    We controlled the parameter count by multiplying the amount of filters for the Conv2D layers and the amount of units
+    We trained $15$ sets containing $3$ convolutional models each on a randomly selected small subset of size 100 images
+    from the CIFAR-10 dataset, each model having the same architecture (\textit{see figure 1 below}).
+    Models within a set had the same number of parameters, and separate sets had different numbers of parameters,
+    uniformly ranging from approximately 1 million to 50 million.
+    On the initialization of each model in each set, the values of the parameters are randomly set, so each model can be seen as randomly
+    selected from all possible models of their respective size and architecture before training.
+    We controlled the parameter count by multiplying the amount of filters for the Conv2D layers and the amount of neurons
     for the hidden Dense layers by a scalar factor, $n$.
-    For each model, the initial values of the parameters are randomly set, so each model can be seen as randomly
-    selected from all possible models of that size and architecture before training.
 
     \noindent\textbf{Model Architecture}
     \begin{center}
         \begin{tikzpicture}[node distance=4mm and 0mm]
             \node[layer=gray!10]                     (input)  {Input $(32\times32\times3)$};
-            \node[layer=blue!10,  below=of input]    (conv1)  {Conv2D: $32n$ filters, $3\times3$, ReLU};
+            \node[layer=blue!10,  below=of input]    (conv1)  {Conv2D: $32\cdot n$ filters, $3\times3$, ReLU};
             \node[layer=cyan!10,  below=of conv1]    (pool1)  {MaxPool: $2\times2$};
-            \node[layer=blue!10,  below=of pool1]    (conv2)  {Conv2D: $64n$ filters, $3\times3$, ReLU};
+            \node[layer=blue!10,  below=of pool1]    (conv2)  {Conv2D: $64\cdot n$ filters, $3\times3$, ReLU};
             \node[layer=cyan!10,  below=of conv2]    (pool2)  {MaxPool: $2\times2$};
             \node[layer=orange!10,below=of pool2]    (flat)   {Flatten};
-            \node[layer=green!15, below=of flat]    (dense1) {Dense: $128n$ units, ReLU};
-            \node[layer=green!15, below=of dense1]  (dense2) {Dense: $64n$ units, ReLU};
+            \node[layer=green!15, below=of flat]    (dense1) {Dense: $128\cdot n$ units, ReLU};
+            \node[layer=green!15, below=of dense1]  (dense2) {Dense: $64\cdot n$ units, ReLU};
             \node[layer=red!15,   below=of dense2]  (output) {Dense (Output): 10, Softmax};
 
             \draw[arrow] (input)  -- (conv1);
@@ -106,6 +107,12 @@
     \end{center}
 
     \centerline{\textit{Figure 1: General Architecture of Our Models}}
+
+    For each set, each model was trained for $60$ epochs on the randomly selected subset of 100 images and then tested
+    on the full test set of CIFAR-10. The difference between the train and test accuracy (train - test) was then
+    computed for each model, and the average of that value was computed for each set of models by adding up all of
+    the differences and then dividing by the size of the set. Then, the data were graphed on a scatter plot with the x-axis
+    as parameter number and the y-axis as the calculated average difference between train and test accuracy for each set of models.
 
     \noindent\textbf{Data Display}
 
