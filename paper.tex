@@ -51,13 +51,13 @@
     powerful and unique solutions to a wide variety of problems. However, with power also comes risk,
     as training a neural network too much on a small dataset can cause overfitting. Overfitting occurs
     when a model learns the training data too well by essentially memorizing it, causing it to perform
-    well on data in its training set but poorly on unseen data. While it might seem that simply
-    increasing a model’s size would always boost accuracy by allowing it to capture more patterns,
-    extra parameters often give the network enough capacity to store the training set outright, allowing
-    it to overfit. Smaller networks, by contrast, are forced to find the underlying patterns in the data
-    because of their limited size. In this study, we investigate whether increasing the number of parameters
-    in a convolutional neural network leads to greater overfitting when trained on a small dataset, as
-    measured by the difference between training and test accuracy.
+    well on data in its training set but poorly on test data (data that were not in the training set).
+    While it might seem that simply increasing a model’s size would always boost accuracy by allowing it to
+    capture more patterns, extra parameters often give the network enough capacity to store the training set
+    outright when the training set is small, allowing it to overfit. Smaller networks, by contrast, are forced to find the underlying patterns
+    in the data because of their limited size. In this study, we investigate whether increasing the number of
+    parameters in a convolutional neural network leads to greater overfitting when trained on a small dataset, as
+    measured by the difference between its accuracy on the training dataset and the test dataset.
 
     \noindent\textbf{2. Statistical Question}
 
@@ -73,12 +73,14 @@
 
     \noindent\textbf{3. Data Collection}
 
-    We trained $15$ sets containing $3$ convolutional models each on a randomly selected small subset of size 100 images
-    from the CIFAR-10 dataset, each model having the same architecture (\textit{see figure 1 below}).
-    Models within a set had the same number of parameters, and separate sets had different numbers of parameters,
-    uniformly ranging from approximately 1 million to 50 million.
+    We trained $100$ convolutional models each on the same randomly selected small subset of 100 images
+    from the Canadian Institute For Advanced Research - 10 dataset (CIFAR-10), which consists of 32x32 color images labeled with one one of ten classes (e.g., plane, boat, etc).
+    Each model had the same architecture, the only difference between them being the number of parameters (\textit{see figure 1 below}).
+    The training dataset was constructed by randomly selecting 10 of each class of image to ensure that it is representative of the entire dataset.
+    The number of filters and neurons in each model were varied so that the model sizes are roughly uniform, ranging from approximately 1m - 50m parameters.
+    The architecture and the ratio of layer sizes were also kept the same for each model, making sure the only difference between them is the number of parameters.
     On the initialization of each model in each set, the values of the parameters are randomly set, so each model can be seen as randomly
-    selected from all possible models of their respective size and architecture before training.
+    selected from all possible models of their respective size and architecture before training, ensuring the experiment is statistically valid.
     We controlled the parameter count by multiplying the amount of filters for the Conv2D layers and the amount of neurons
     for the hidden Dense layers by a scalar factor, $n$.
 
@@ -91,8 +93,8 @@
             \node[layer=blue!10,  below=of pool1]    (conv2)  {Conv2D: $64\cdot n$ filters, $3\times3$, ReLU};
             \node[layer=cyan!10,  below=of conv2]    (pool2)  {MaxPool: $2\times2$};
             \node[layer=orange!10,below=of pool2]    (flat)   {Flatten};
-            \node[layer=green!15, below=of flat]    (dense1) {Dense: $128\cdot n$ units, ReLU};
-            \node[layer=green!15, below=of dense1]  (dense2) {Dense: $64\cdot n$ units, ReLU};
+            \node[layer=green!15, below=of flat]    (dense1) {Dense: $128\cdot n$ neurons, ReLU};
+            \node[layer=green!15, below=of dense1]  (dense2) {Dense: $64\cdot n$ neurons, ReLU};
             \node[layer=red!15,   below=of dense2]  (output) {Dense (Output): 10, Softmax};
 
             \draw[arrow] (input)  -- (conv1);
@@ -108,11 +110,10 @@
 
     \centerline{\textit{Figure 1: General Architecture of Our Models}}
 
-    For each set, each model was trained for $60$ epochs on the randomly selected subset of 100 images and then tested
-    on the full test set of CIFAR-10. The difference between the train and test accuracy (train - test) was then
-    computed for each model, and the average of that value was computed for each set of models by adding up all of
-    the differences and then dividing by the size of the set. Then, the data were graphed on a scatter plot with the x-axis
-    as parameter number and the y-axis as the calculated average difference between train and test accuracy for each set of models.
+    Each model was trained for $100$ epochs on the randomly selected subset of 100 images and then tested
+    on the full test set of the CIFAR-10 dataset, made up of $10,000$ images. The difference between the train and test accuracy (train - test) was then
+    computed for each model and graphed on a scatter plot with the x-axis
+    as parameter count and the y-axis as the difference between train and test accuracy for each model.
 
     \noindent\textbf{Data Display}
 
