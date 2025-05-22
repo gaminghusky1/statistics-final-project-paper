@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1747779753.02674 "paper.tex" "out/paper.pdf" "paper" 1747779753.5285 0
+["pdflatex"] 1747941001.47485 "paper.tex" "out/paper.pdf" "paper" 1747941001.96405 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -138,8 +138,8 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1742517418 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "out/paper.aux" 1747779753.48262 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
-  "paper.tex" 1747779752.93272 5775 983927214f7242d970320d9c0a579f1f ""
+  "out/paper.aux" 1747941001.91615 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
+  "paper.tex" 1747940265.03458 7715 6b743c5f87b5d13d47502236a2ba06dd ""
   (generated)
   "out/paper.aux"
   "out/paper.log"
