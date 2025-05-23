@@ -76,11 +76,11 @@
 
     \section*{3. Data Collection}
 
-    We trained $100$ convolutional models each on the same randomly selected small subset of 100 images
+    We trained $150$ convolutional models each on the same randomly selected small subset of 100 images
     from the Canadian Institute For Advanced Research - 10 dataset (CIFAR-10), which consists of 32x32 color images labeled with one one of ten classes (e.g., plane, boat, etc).
     Each model had the same architecture, the only difference between them being the number of parameters (\textit{see Figure 1 below}).
     The training dataset was constructed by randomly selecting 10 of each class of image to ensure that it is representative of the entire dataset.
-    The number of filters and neurons in each model were varied so that the model sizes are roughly uniform, ranging from approximately 1m - 50m parameters.
+    The number of filters and neurons in each model were varied so that the model sizes are roughly uniform, ranging from approximately 1m - 25m parameters.
     The architecture and the ratio of layer sizes were also kept the same for each model, making sure the only difference between them is the number of parameters.
     On the initialization of each model in each set, the values of the parameters are randomly set, so each model can be seen as randomly
     selected from all possible models of their respective size and architecture before training, ensuring the experiment is statistically valid.
@@ -178,12 +178,53 @@
 
     \subsection*{5.2 Calculations}
 
-    We used the following equation to calculate the Standard Error $SE_\beta$ of the slope \beta:
-
-    \begin{equation*}
-        \centering
-        SE_\beta = \frac{s}{s_x\sqrt{n - 1}}
-    \end{equation*}
+    We used the following equation to calculate the Standard Error $SE_\beta$ of the slope $\beta$:
+    \[
+        \mathrm{SE}_{\beta}
+        =
+        \frac{
+            \displaystyle S
+        }{
+            \displaystyle S_x \sqrt{n - 1}
+        }
+    \]
+    \noindent We need the standard deviation of the residuals and of the parameter counts to find $SE_\beta$, which we found like this:
+    \begin{align*}
+        \mathrm{S} &=
+        \sqrt{
+            \frac{
+                \sum_{i=1}^n (y_i - \hat{y}_i)^2
+            }{
+                n - 2
+            }
+        } \\[1em]
+        \mathrm{S}_x &=
+        \sqrt{
+            \frac{
+                \sum_{i=1}^n (x_i - \bar{x})^2
+            }{
+                n - 1
+            }
+        }
+    \end{align*}
+    \noindent After plugging in all of the data from the 150 models, we got $S = 0.01703$ and $S_x = 0.6972$.
+    Now we can use those to find $SE_\beta$:
+    \[
+        \mathrm{SE}_{\beta}
+        =
+        \frac{
+            \displaystyle 0.01703
+        }{
+            \displaystyle 0.6972 \sqrt{150 - 1}
+        }
+        =
+        0.002008
+    \]
+    \noindent And now we can find the t-statistic:
+    \begin{gather*}
+        \mathrm{t} = \frac{b}{SE_\beta} \\[1em]
+        \mathrm{t} = \frac{0.008312}{0.002008} = 4.139
+    \end{gather*}
 
     \section*{6. Conclusion}
 
