@@ -178,6 +178,8 @@
 
     \subsection*{5.2 Calculations}
 
+    \subsubsection*{5.2.1 Standard Error}
+
     We used the following equation to calculate the Standard Error $SE_\beta$ of the slope $\beta$:
     \[
         \mathrm{SE}_{\beta}
@@ -220,13 +222,40 @@
         =
         0.002008
     \]
-    \noindent And now we can find the t-statistic:
+
+    \subsubsection*{5.2.2 $t$-statistic}
+    \noindent And now we can find the t-statistic, which represents how many standard deviations away our sample slope $b$ is from the population slope $\beta$, assuming that $\beta=0$:
     \begin{gather*}
         \mathrm{t} = \frac{b}{SE_\beta} \\[1em]
         \mathrm{t} = \frac{0.008312}{0.002008} = 4.139
     \end{gather*}
 
+    \subsubsection*{5.2.3 $p$-value}
+    \noindent Now that we have the t-statistic, we can use it to find the $p$-value, which represents the probability of getting a test statistic
+    of $4.139$ or higher, assuming that the population slope $\beta$ is $0$. Because we have 150 data points, we have $150 - 2 = 148$ degrees of freedom.
+    Thus, we calculate the $p$-value by finding the amount of area under a $t$-distribution with 148 degrees of freedom, above $t=4.139$. The graph below demonstrates this:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{Images/tdistribution}
+        \caption{p-value calculation on a t-distribution with df = 148}
+        \label{fig:t_dist}
+    \end{figure}
+
+    \noindent Based on the area under the curve in \textit{\autoref{fig:t_dist}} above $t=4.139$, our $p$-value is $2.916\cdot10^{-5}$.
+
     \section*{6. Conclusion}
+
+    The $p$-value of $2.916\cdot10^{-5}$ indicates that, assuming that the population slope $\beta=0$, there is around a
+    $0.002916\%$ probability of getting a sample slope as great or greater than our sample slope of $0.008312$, in a sample of
+    150 randomly selected models from the population of convolutional models of our structure and of size 1 million parameters to 25 million parameters, trained
+    on a randomly selected subset of 100 images from the CIFAR-10 train dataset and tested on the full test dataset of CIFAR-10.
+    Because the $p$-value of $2.916\cdot10^{-5}$ is less than $\alpha=0.05$, we reject the null hypothesis, which states that the population slope $\beta$
+    of the least-squares regression line that relates parameter count to difference in train and test accuracy (train - test) is $0$,
+    in the population defined above.
+    The data do provide convincing evidence that the population slope $\beta$ is greater than $0$, and that there is a positive correlation between
+    parameter count and difference between train and test accuracy (train - test) in the population defined above.
+
 
     \section*{7. Reflection}
 
