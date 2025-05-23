@@ -7,12 +7,13 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{caption}
+\usepackage[labelfont=it, textfont=it]{caption}
 \usepackage{float}
 \usepackage{tikz}
 \usepackage{setspace}
 \usepackage{times}
 \usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 
 \doublespacing
 
@@ -77,7 +78,7 @@
 
     We trained $100$ convolutional models each on the same randomly selected small subset of 100 images
     from the Canadian Institute For Advanced Research - 10 dataset (CIFAR-10), which consists of 32x32 color images labeled with one one of ten classes (e.g., plane, boat, etc).
-    Each model had the same architecture, the only difference between them being the number of parameters (\textit{see figure 1 below}).
+    Each model had the same architecture, the only difference between them being the number of parameters (\textit{see Figure 1 below}).
     The training dataset was constructed by randomly selecting 10 of each class of image to ensure that it is representative of the entire dataset.
     The number of filters and neurons in each model were varied so that the model sizes are roughly uniform, ranging from approximately 1m - 50m parameters.
     The architecture and the ratio of layer sizes were also kept the same for each model, making sure the only difference between them is the number of parameters.
@@ -87,30 +88,32 @@
     for the hidden Dense layers by a scalar factor, $n$.
 
     \noindent\textbf{Model Architecture}
-    \begin{center}
-        \begin{tikzpicture}[node distance=4mm and 0mm]
-            \node[layer=gray!10]                     (input)  {Input $(32\times32\times3)$};
-            \node[layer=blue!10,  below=of input]    (conv1)  {Conv2D: $32\cdot n$ filters, $3\times3$, ReLU};
-            \node[layer=cyan!10,  below=of conv1]    (pool1)  {MaxPool: $2\times2$};
-            \node[layer=blue!10,  below=of pool1]    (conv2)  {Conv2D: $64\cdot n$ filters, $3\times3$, ReLU};
-            \node[layer=cyan!10,  below=of conv2]    (pool2)  {MaxPool: $2\times2$};
-            \node[layer=orange!10,below=of pool2]    (flat)   {Flatten};
-            \node[layer=green!15, below=of flat]    (dense1) {Dense: $128\cdot n$ neurons, ReLU};
-            \node[layer=green!15, below=of dense1]  (dense2) {Dense: $64\cdot n$ neurons, ReLU};
-            \node[layer=red!15,   below=of dense2]  (output) {Dense (Output): 10, Softmax};
+    \begin{figure}[H]
+        \begin{center}
+            \begin{tikzpicture}[node distance=4mm and 0mm]
+                \node[layer=gray!10]                     (input)  {Input $(32\times32\times3)$};
+                \node[layer=blue!10,  below=of input]    (conv1)  {Conv2D: $32\cdot n$ filters, $3\times3$, ReLU};
+                \node[layer=cyan!10,  below=of conv1]    (pool1)  {MaxPool: $2\times2$};
+                \node[layer=blue!10,  below=of pool1]    (conv2)  {Conv2D: $64\cdot n$ filters, $3\times3$, ReLU};
+                \node[layer=cyan!10,  below=of conv2]    (pool2)  {MaxPool: $2\times2$};
+                \node[layer=orange!10,below=of pool2]    (flat)   {Flatten};
+                \node[layer=green!15, below=of flat]    (dense1) {Dense: $128\cdot n$ neurons, ReLU};
+                \node[layer=green!15, below=of dense1]  (dense2) {Dense: $64\cdot n$ neurons, ReLU};
+                \node[layer=red!15,   below=of dense2]  (output) {Dense (Output): 10, Softmax};
 
-            \draw[arrow] (input)  -- (conv1);
-            \draw[arrow] (conv1)  -- (pool1);
-            \draw[arrow] (pool1)  -- (conv2);
-            \draw[arrow] (conv2)  -- (pool2);
-            \draw[arrow] (pool2)  -- (flat);
-            \draw[arrow] (flat)   -- (dense1);
-            \draw[arrow] (dense1) -- (dense2);
-            \draw[arrow] (dense2) -- (output);
-        \end{tikzpicture}
-    \end{center}
-
-    \centerline{\textit{Figure 1: General Architecture of Our Models}}
+                \draw[arrow] (input)  -- (conv1);
+                \draw[arrow] (conv1)  -- (pool1);
+                \draw[arrow] (pool1)  -- (conv2);
+                \draw[arrow] (conv2)  -- (pool2);
+                \draw[arrow] (pool2)  -- (flat);
+                \draw[arrow] (flat)   -- (dense1);
+                \draw[arrow] (dense1) -- (dense2);
+                \draw[arrow] (dense2) -- (output);
+            \end{tikzpicture}
+            \caption{General Architecture of Our Models}
+        \end{center}
+        \label{fig:architecture}
+    \end{figure}
 
     Each model was trained for $100$ epochs on the randomly selected subset of 100 images and then tested
     on the full test set of the CIFAR-10 dataset, made up of $10,000$ images. The difference between the train and test accuracy (train - test) was then
@@ -118,6 +121,27 @@
     as parameter count and the y-axis as the difference between train and test accuracy for each model.
 
     \section*{4. Data Display}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{Images/Scatter}
+        \caption{Scatterplot of Parameter Count vs. Difference in Train and Test Accuracy (Train - Test)}
+        \label{fig:scatterplot}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{Images/Resid}
+        \caption{Residual Plot (Parameter Count vs. Residuals)}
+        \label{fig:residuals}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{Images/Resid Hist}
+        \caption{Histogram of Residuals}
+        \label{fig:residual_hist}
+    \end{figure}
 
     \section*{5. Data Analysis}
 
@@ -129,25 +153,37 @@
 
     \textbf{5.1.1 Linear}
 
-    {The scatterplot of the data shows a clear linear trend, and the residual plot shows no remaining curved pattern. Therefore, the linearity condition is satisfied.}
+    The scatterplot of the data (\textit{\autoref{fig:scatterplot}}) shows a clear linear trend, and the residual plot (\textit{\autoref{fig:residuals}}) shows no remaining curved pattern.
+    Therefore, the linearity condition is satisfied.
 
     \textbf{5.1.2 Independent}
 
     Each model was trained independently with no interaction between runs. Thus, the independence condition is met by the design of the experiment.
 
     \textbf{5.1.3 Normal}
-    The dotplot of the residuals shows no strong skew and no outliers, suggesting the residuals are approximately normally distributed.
+
+    The histogram of the residuals (\textit{\autoref{fig:residual_hist}}) shows no strong skew and no obvious outliers,
+    so the normality condition is met.
 
     \textbf{5.1.4 Equal Variance}
-    The residual plot shows shows no noticeable $<$ or $>$ shape, so the equal variance condition is satisfied.
+
+    The residual plot (\textit{\autoref{fig:residuals}}) shows shows no noticeable $<$ or $>$ shape, so the equal variance condition is satisfied.
 
     \textbf{5.1.5 Random}
+
     The parameters of the model were randomized on initialization, so each model can be seen as randomly selected from the population
     of models of the same size and structure.
 
     \end{quote}
 
     \subsection*{5.2 Calculations}
+
+    We used the following equation to calculate the Standard Error $SE_\beta$ of the slope \beta:
+
+    \begin{equation*}
+        \centering
+        SE_\beta = \frac{s}{s_x\sqrt{n - 1}}
+    \end{equation*}
 
     \section*{6. Conclusion}
 
