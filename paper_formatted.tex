@@ -76,18 +76,17 @@
 
     \section*{3. Data Collection}
 
-    We trained $150$ convolutional models each on the same randomly selected small subset of 100 images
-    from the Canadian Institute For Advanced Research - 10 dataset (CIFAR-10), which consists of 32x32 color images labeled with one one of ten classes (e.g., plane, boat, etc).
-    Each model had the same architecture, the only difference between them being the number of parameters (\textit{see Figure 1 below}).
-    The training dataset was constructed by randomly selecting 10 of each class of image to ensure that it is representative of the entire dataset.
-    The number of filters and neurons in each model were varied so that the model sizes are roughly uniform, ranging from approximately 1m - 25m parameters.
-    The architecture and the ratio of layer sizes were also kept the same for each model, making sure the only difference between them is the number of parameters.
-    On the initialization of each model in each set, the values of the parameters are randomly set, so each model can be seen as randomly
+    We trained 150 convolutional models, each on the same randomly selected small subset of 100 images
+    from the Canadian Institute For Advanced Research - 10 dataset (CIFAR-10), which consists of 32x32 color images each labeled with one of ten classes (e.g., plane, boat, etc).
+    % Each model had the same architecture, with the only difference between them being the number of parameters (\textit{see Figure 1 below}).
+    The training dataset was constructed through stratified random sampling by randomly selecting 10 of each class of image, ensuring that it is representative of the entire dataset.
+    The number of filters and neurons were varied between models in a way such that the sizes of the models (in parameter count) were roughly uniformly distributed, ranging from approximately 1m to 25m parameters.
+    The architecture and the ratio of layer sizes were kept consistent between each model, ensuring that the only difference between them was the number of parameters (\textit{see Figure 1 below}).
+    On the initialization of each model, the values of the parameters for that model were randomly set, so each model can be seen as randomly
     selected from all possible models of their respective size and architecture before training, ensuring the experiment is statistically valid.
     We controlled the parameter count by multiplying the amount of filters for the Conv2D layers and the amount of neurons
     for the hidden Dense layers by a scalar factor, $n$.
 
-    \noindent\textbf{Model Architecture}
     \begin{figure}[H]
         \begin{center}
             \begin{tikzpicture}[node distance=4mm and 0mm]
@@ -115,33 +114,35 @@
         \label{fig:architecture}
     \end{figure}
 
-    Each model was trained for $100$ epochs on the randomly selected subset of 100 images and then tested
-    on the full test set of the CIFAR-10 dataset, made up of $10,000$ images. The difference between the train and test accuracy (train - test) was then
+    \noindent Each model was trained for 100 epochs on the randomly selected subset of 100 images, then evaluated
+    on the full test set of the CIFAR-10 dataset, made up of 10,000 images. The difference between the train and test accuracy (train - test) was then
     computed for each model and graphed on a scatter plot with the x-axis
     as parameter count and the y-axis as the difference between train and test accuracy for each model.
 
     \section*{4. Data Display}
-
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{Images/Scatter}
         \caption{Scatterplot of Parameter Count vs. Difference in Train and Test Accuracy (Train - Test)}
         \label{fig:scatterplot}
     \end{figure}
-
+    There appears to be a moderate, positive, linear relationship between parameter count and difference between
+    train and test accuracy (train - test). There appear to be a few possible high outliers above $x =$ 1.5 million parameters
+    and a few possible low outliers above $x = 0.5$ million parameters.
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{Images/Resid}
         \caption{Residual Plot (Parameter Count vs. Residuals)}
         \label{fig:residuals}
     \end{figure}
-
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{Images/Resid Hist}
         \caption{Histogram of Residuals}
         \label{fig:residual_hist}
     \end{figure}
+    \noindent The histogram of the residuals appears to be approximately symmetric, with a median around 0 and a range of
+    $0.05-(-0.04)=0.09$. There do not appear to be any obvious outliers.
 
     \section*{5. Data Analysis}
 
