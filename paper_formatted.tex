@@ -294,21 +294,21 @@
     and difference between train and test accuracy (train - test). Through a $t$-test for the population slope, we found that there is a positive relationship
     between parameter count and difference between train and test accuracy (train - test), and thus that increasing parameter count increases the difference and causes overfitting.
 
-    We could have potentially made a Type I error, because we rejected the null hypothesis. If we had made a Type I error,
+    \bigskip\noindent We could have potentially made a Type I error, because we rejected the null hypothesis. If we had made a Type I error,
     that would mean that we found convincing evidence that increasing the parameter count of the model between 1m and 25m parameters
     caused overfitting, when in reality it didn't. A potential consequence of this would be that we would only use models with less than 1 million parameters,
     believing that models larger than 1 million parameters would perform worse on the test dataset, losing the potential
     of getting better accuracy by using larger models.
 
-    However, our design included many limitations that could be addressed in future experiments.
+    \bigskip\noindent However, our design included many limitations that could be addressed in future experiments.
     We only trained models with 1m to 25m parameters, which means we can only generalize to models of these sizes.
     In the future, we could conduct tests with a wider range of parameter sizes, which would allow us to generalize our results to a wider range of model sizes or potentially reveal a new trend with larger parameter sizes.
 
-    Another major limitation was the compute time required. Despite training relatively simple models on a small dataset, it took over two hours to train all 150 models.
+    \bigskip\noindent Another major limitation was the compute time required. Despite training relatively simple models on a small dataset, it took over two hours to train all 150 models.
     If we wanted to scale the experiment up with more complex models or larger datasets, the compute time required could make the experiment impractical.
     In the future, we could optimize the experiment by training the models for less epochs or using less models, although this would decrease the power of the test.
 
-    Finally, our results are only applicable to models of the specific architecture we used on a 100 image subset of the CIFAR-10 dataset, which is not useful to many people training neural networks.
+    \bigskip\noindent Finally, our results are only applicable to models of the specific architecture we used on a 100 image subset of the CIFAR-10 dataset, which is not useful to many people training neural networks.
     If we wanted the test to be more useful in helping people decide the size of their models, we could perform an experiment on different model architectures and datasets, allowing a broader generalization.
 
 
@@ -319,84 +319,93 @@
 %    We could also conduct tests with larger training datasets and see if the slope lowers as the training dataset size increases (because overfitting generally happens on small training datasets).
 %    In the future we could also generalize our test to
     \clearpage
-
-
     \appendix
-    \section*{Appendix: Raw Data}
+    \textbf{Appendix: Raw Data}
     \addcontentsline{toc}{section}{Appendix: Raw Data}
 
+    \begingroup
+    \scriptsize
+    \setlength{\tabcolsep}{2pt}       % tighten column separation
+
     \begin{longtable}{@{}
-        S[table-format=8.0]  c
-        S[table-format=8.0]  c
-        S[table-format=8.0]  c
-        @{}}
+        S[table-format=8.0] c
+        S[table-format=8.0] c
+        S[table-format=8.0] c
+        S[table-format=8.0] c
+        S[table-format=8.0] c
+        S[table-format=8.0] c @{}}
         \caption{Raw Data: Parameter Count vs.\ Train–Test Accuracy Difference}\\
         \toprule
-        \textbf{Param. Count} & \textbf{Accuracy}
-        & \textbf{Param. Count} & \textbf{Accuracy}
-        & \textbf{Param. Count} & \textbf{Accuracy} \\
+        \textbf{Param.} & \textbf{Acc.} & \textbf{Param.} & \textbf{Acc.} &
+        \textbf{Param.} & \textbf{Acc.} & \textbf{Param.} & \textbf{Acc.} &
+        \textbf{Param.} & \textbf{Acc.} & \textbf{Param.} & \textbf{Acc.}\\
         \midrule
         \endfirsthead
 
         \toprule
-        \textbf{Param. Count} & \textbf{Accuracy}
-        & \textbf{Param. Count} & \textbf{Accuracy}
-        & \textbf{Param. Count} & \textbf{Accuracy} \\
+        \multicolumn{12}{c}{\textbf{(continued)}}\\\midrule
+        \multicolumn{2}{c}{\textbf{Col 1}} & \multicolumn{2}{c}{\textbf{Col 2}} &
+        \multicolumn{2}{c}{\textbf{Col 3}} & \multicolumn{2}{c}{\textbf{Col 4}} &
+        \multicolumn{2}{c}{\textbf{Col 5}} & \multicolumn{2}{c}{\textbf{Col 6}} \\
+        \textbf{Param.} & \textbf{Acc.} & \textbf{Param.} & \textbf{Acc.} &
+        \textbf{Param.} & \textbf{Acc.} & \textbf{Param.} & \textbf{Acc.} &
+        \textbf{Param.} & \textbf{Acc.} & \textbf{Param.} & \textbf{Acc.}\\
         \midrule
         \endhead
 
         \bottomrule
         \endfoot
 
-        \num{991995}   & 0.7642 & \num{1156636} & 0.7502 & \num{1314120} & 0.7201 \\
-        \num{1481652}  & 0.7358 & \num{1653866} & 0.7463 & \num{1817930} & 0.7685 \\
-        \num{1964108}  & 0.7325 & \num{2122007} & 0.7377 & \num{2279711} & 0.7495 \\
-        \num{2443067}  & 0.7769 & \num{2612075} & 0.7425 & \num{2779778} & 0.7594 \\
-        \num{2928578}  & 0.7481 & \num{3083068} & 0.7738 & \num{3247185} & 0.7501 \\
-        \num{3409755}  & 0.7267 & \num{3574350} & 0.7405 & \num{3736748} & 0.7334 \\
-        \num{3908963}  & 0.7632 & \num{4058757} & 0.7677 & \num{4231690} & 0.7548 \\
-        \num{4387487}  & 0.7339 & \num{4537211} & 0.7427 & \num{4689447} & 0.7547 \\
-        \num{4872926}  & 0.7316 & \num{5030648} & 0.7497 & \num{5190882} & 0.7655 \\
-        \num{5353628}  & 0.7383 & \num{5518886} & 0.7448 & \num{5686656} & 0.7583 \\
-        \num{5825435}  & 0.7481 & \num{5997767} & 0.7711 & \num{6162250} & 0.7160 \\
-        \num{6304105}  & 0.7488 & \num{6472707} & 0.7484 & \num{6620711} & 0.7465 \\
-        \num{6793468}  & 0.7498 & \num{6942372} & 0.7816 & \num{7119248} & 0.7650 \\
-        \num{7274427}  & 0.7643 & \num{7455458} & 0.7449 & \num{7611411} & 0.7603 \\
-        \num{7760207}  & 0.7178 & \num{7947148} & 0.7343 & \num{8108136} & 0.7494 \\
-        \num{8261687}  & 0.7490 & \num{8413707} & 0.7760 & \num{8570111} & 0.7762 \\
-        \num{8724930}  & 0.7676 & \num{8884187} & 0.7677 & \num{9041805} & 0.7389 \\
-        \num{9203915}  & 0.7700 & \num{9364332} & 0.7457 & \num{9529295} & 0.7531 \\
-        \num{9692511}  & 0.7650 & \num{9860327} & 0.7574 & \num{10026342} & 0.7423 \\
-        \num{10183690} & 0.7185 & \num{10352393} & 0.7567 & \num{10480242} & 0.7178 \\
-        \num{10654715} & 0.7686 & \num{10813533} & 0.7413 & \num{10990748} & 0.7619 \\
-        \num{11122467} & 0.7582 & \num{11298745} & 0.7555 & \num{11465740} & 0.7503 \\
-        \num{11644706} & 0.7431 & \num{11780277} & 0.7401 & \num{11950780} & 0.7537 \\
-        \num{12133478} & 0.7462 & \num{12271857} & 0.7536 & \num{12445868} & 0.7624 \\
-        \num{12586011} & 0.7623 & \num{12773485} & 0.7606 & \num{12951004} & 0.7709 \\
-        \num{13093955} & 0.7385 & \num{13269953} & 0.7223 & \num{13399368} & 0.7681 \\
-        \num{13544767} & 0.7861 & \num{13727548} & 0.7464 & \num{13874711} & 0.7629 \\
-        \num{14055863} & 0.7519 & \num{14204772} & 0.7547 & \num{14391938} & 0.7496 \\
-        \num{14526700} & 0.7440 & \num{14678075} & 0.7440 & \num{14864381} & 0.7778 \\
-        \num{15017502} & 0.7522 & \num{15155155} & 0.8039 & \num{15348460} & 0.7520 \\
-        \num{15504047} & 0.7453 & \num{15643907} & 0.7702 & \num{15836226} & 0.7647 \\
-        \num{15977573} & 0.7830 & \num{16119548} & 0.7416 & \num{16278987} & 0.7585 \\
-        \num{16422292} & 0.7620 & \num{16623490} & 0.7814 & \num{16768300} & 0.7512 \\
-        \num{16930907} & 0.7684 & \num{17077047} & 0.7480 & \num{17277956} & 0.7671 \\
-        \num{17425583} & 0.7586 & \num{17591340} & 0.7540 & \num{17740297} & 0.7658 \\
-        \num{17889882} & 0.7834 & \num{18099850} & 0.7866 & \num{18250940} & 0.7443 \\
-        \num{18402658} & 0.7526 & \num{18572987} & 0.7770 & \num{18726035} & 0.7677 \\
-        \num{18879711} & 0.7298 & \num{19034015} & 0.7322 & \num{19246091} & 0.7612 \\
-        \num{19344507} & 0.7307 & \num{19500695} & 0.7613 & \num{19657511} & 0.7302 \\
-        \num{19814955} & 0.7481 & \num{19973027} & 0.7509 & \num{20131727} & 0.7725 \\
-        \num{20291055} & 0.7952 & \num{20451011} & 0.7881 & \num{20670818} & 0.7372 \\
-        \num{20832261} & 0.7392 & \num{20994332} & 0.7605 & \num{21157031} & 0.7665 \\
-        \num{21320358} & 0.7831 & \num{21484313} & 0.7655 & \num{21648896} & 0.7812 \\
-        \num{21814107} & 0.7388 & \num{21918875} & 0.7749 & \num{22085111} & 0.7238 \\
-        \num{22251975} & 0.7380 & \num{22419467} & 0.7686 & \num{22567754} & 0.8055 \\
-        \num{22736428} & 0.7818 & \num{22905730} & 0.7743 & \num{23008186} & 0.7285 \\
-        \num{23178495} & 0.7603 & \num{23349432} & 0.7842 & \num{23520997} & 0.7418 \\
-        \num{23693190} & 0.7992 & \num{23866011} & 0.7622 & \num{24018998} & 0.7663 \\
-        \num{24193001} & 0.7622 & \num{24367632} & 0.7711 & \num{24542891} & 0.7671 \\
-        \num{24654011} & 0.7606 & \num{24830295} & 0.7835 & \num{25007207} & 0.7820 \\
+        \num{991995}&0.7642  & \num{1156636}&0.7502  & \num{1314120}&0.7201  &
+        \num{1481652}&0.7358  & \num{1653866}&0.7463  & \num{1817930}&0.7685  \\
+        \num{1964108}&0.7325  & \num{2122007}&0.7377  & \num{2279711}&0.7495  &
+        \num{2443067}&0.7769  & \num{2612075}&0.7425  & \num{2779778}&0.7594  \\
+        \num{2928578}&0.7481  & \num{3083068}&0.7738  & \num{3247185}&0.7501  &
+        \num{3409755}&0.7267  & \num{3574350}&0.7405  & \num{3736748}&0.7334  \\
+        \num{3908963}&0.7632  & \num{4058757}&0.7677  & \num{4231690}&0.7548  &
+        \num{4387487}&0.7339  & \num{4537211}&0.7427  & \num{4689447}&0.7547  \\
+        \num{4872926}&0.7316  & \num{5030648}&0.7497  & \num{5190882}&0.7655  &
+        \num{5353628}&0.7383  & \num{5518886}&0.7448  & \num{5686656}&0.7583  \\
+        \num{5825435}&0.7481  & \num{5997767}&0.7711  & \num{6162250}&0.7160  &
+        \num{6304105}&0.7488  & \num{6472707}&0.7484  & \num{6620711}&0.7465  \\
+        \num{6793468}&0.7498  & \num{6942372}&0.7816  & \num{7119248}&0.7650  &
+        \num{7274427}&0.7643  & \num{7455458}&0.7449  & \num{7611411}&0.7603  \\
+        \num{7760207}&0.7178  & \num{7947148}&0.7343  & \num{8108136}&0.7494  &
+        \num{8261687}&0.7490  & \num{8413707}&0.7760  & \num{8570111}&0.7762  \\
+        \num{8724930}&0.7676  & \num{8884187}&0.7677  & \num{9041805}&0.7389  &
+        \num{9203915}&0.7700  & \num{9364332}&0.7457  & \num{9529295}&0.7531  \\
+        \num{9692511}&0.7650  & \num{9860327}&0.7574  & \num{10026342}&0.7423 &
+        \num{10183690}&0.7185 & \num{10352393}&0.7567 & \num{10480242}&0.7178 \\
+        \num{10654715}&0.7686 & \num{10813533}&0.7413 & \num{10990748}&0.7619 &
+        \num{11122467}&0.7582 & \num{11298745}&0.7555 & \num{11465740}&0.7503 \\
+        \num{11644706}&0.7431 & \num{11780277}&0.7401 & \num{11950780}&0.7537 &
+        \num{12133478}&0.7462 & \num{12271857}&0.7536 & \num{12445868}&0.7624 \\
+        \num{12586011}&0.7623 & \num{12773485}&0.7606 & \num{12951004}&0.7709 &
+        \num{13093955}&0.7385 & \num{13269953}&0.7223 & \num{13399368}&0.7681 \\
+        \num{13544767}&0.7861 & \num{13727548}&0.7464 & \num{13874711}&0.7629 &
+        \num{14055863}&0.7519 & \num{14204772}&0.7547 & \num{14391938}&0.7496 \\
+        \num{14526700}&0.7440 & \num{14678075}&0.7440 & \num{14864381}&0.7778 &
+        \num{15017502}&0.7522 & \num{15155155}&0.8039 & \num{15348460}&0.7520 \\
+        \num{15504047}&0.7453 & \num{15643907}&0.7702 & \num{15836226}&0.7647 &
+        \num{15977573}&0.7830 & \num{16119548}&0.7416 & \num{16278987}&0.7585 \\
+        \num{16422292}&0.7620 & \num{16623490}&0.7814 & \num{16768300}&0.7512 &
+        \num{16930907}&0.7684 & \num{17077047}&0.7480 & \num{17277956}&0.7671 \\
+        \num{17425583}&0.7586 & \num{17591340}&0.7540 & \num{17740297}&0.7658 &
+        \num{17889882}&0.7834 & \num{18099850}&0.7866 & \num{18250940}&0.7443 \\
+        \num{18402658}&0.7526 & \num{18572987}&0.7770 & \num{18726035}&0.7677 &
+        \num{18879711}&0.7298 & \num{19034015}&0.7322 & \num{19246091}&0.7612 \\
+        \num{19344507}&0.7307 & \num{19500695}&0.7613 & \num{19657511}&0.7302 &
+        \num{19814955}&0.7481 & \num{19973027}&0.7509 & \num{20131727}&0.7725 \\
+        \num{20291055}&0.7952 & \num{20451011}&0.7881 & \num{20670818}&0.7372 &
+        \num{20832261}&0.7392 & \num{20994332}&0.7605 & \num{21157031}&0.7665 \\
+        \num{21320358}&0.7831 & \num{21484313}&0.7655 & \num{21648896}&0.7812 &
+        \num{21814107}&0.7388 & \num{21918875}&0.7749 & \num{22085111}&0.7238 \\
+        \num{22251975}&0.7380 & \num{22419467}&0.7686 & \num{22567754}&0.8055 &
+        \num{22736428}&0.7818 & \num{22905730}&0.7743 & \num{23008186}&0.7285 \\
+        \num{23178495}&0.7603 & \num{23349432}&0.7842 & \num{23520997}&0.7418 &
+        \num{23693190}&0.7992 & \num{23866011}&0.7622 & \num{24018998}&0.7663 \\
+        \num{24193001}&0.7622 & \num{24367632}&0.7711 & \num{24542891}&0.7671 &
+        \num{24654011}&0.7606 & \num{24830295}&0.7835 & \num{25007207}&0.7820 \\
     \end{longtable}
+    \endgroup
 \end{document}
